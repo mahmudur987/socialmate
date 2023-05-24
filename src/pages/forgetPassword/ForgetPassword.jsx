@@ -15,7 +15,7 @@ const ForgetPassword = () => {
     const email = form.name.value;
 
     try {
-      fetch("http://localhost:5000/forgot-password", {
+      fetch("https://socialmate-server.vercel.app/forgot-password", {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
@@ -26,17 +26,15 @@ const ForgetPassword = () => {
         .then((data) => {
           Setloading(false);
           console.log(data);
-          if (data.status === "ok") {
-            localStorage.setItem("token", data.data);
-            toast.success("user Login scssessfully");
-            navigate("/");
-          } else {
-            toast.error(data.status);
-            SetError(data.status);
-          }
+          toast.error(data.status, {
+            duration: 10000,
+          });
         });
     } catch (error) {
       console.error("Error:", error);
+      toast.error(error.status, {
+        duration: 10000,
+      });
     }
     Setloading(false);
   };
@@ -46,13 +44,15 @@ const ForgetPassword = () => {
   }
 
   return (
-    <div className="hero min-h-screen">
-      <div className="hero-content flex-col lg:flex-row-reverse bg-base-200">
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+    <div className="hero ">
+      <div className=" w-full max-w-lg bg-base-200">
+        <div className="card  w-full max-w-lg shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit} className="card-body">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Your registerd email Email</span>
+                <span className="label-text text-xl">
+                  Please write your aignup Email
+                </span>
               </label>
               <input
                 // required
@@ -65,13 +65,17 @@ const ForgetPassword = () => {
             </div>
 
             <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary w-1/2 mx-auto">
                 Forget password
               </button>
             </div>
           </form>
 
-          <Link to={"/login"} type="submit" className=" w-full text-center">
+          <Link
+            to={"/login"}
+            type="submit"
+            className=" w-full text-center text-2xl font-bold text-blue-600 underline p-3"
+          >
             go login
           </Link>
         </div>

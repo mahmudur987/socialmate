@@ -23,7 +23,7 @@ const LogIn = () => {
     };
 
     try {
-      fetch("http://localhost:5000/login-user", {
+      fetch("https://socialmate-server.vercel.app/login-user", {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",

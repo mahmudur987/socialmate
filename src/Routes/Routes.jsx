@@ -6,6 +6,7 @@ import SignUp from "../pages/SignUp/SignUp";
 import NotFound from "../components/NotFound/NotFound";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ForgetPassword from "../pages/forgetPassword/ForgetPassword";
+import PrivatRoutes from "./PrivetRoute";
 
 const routes = createBrowserRouter([
   {
@@ -30,7 +31,12 @@ const routes = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: (
+          <PrivatRoutes>
+            {" "}
+            <Dashboard />
+          </PrivatRoutes>
+        ),
       },
       {
         path: "*",

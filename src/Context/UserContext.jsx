@@ -9,7 +9,7 @@ export const authContext = createContext();
 
 const UserContext = ({ children }) => {
   const [user, SetUser] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const logout = () => {
     localStorage.setItem("token", "");
     SetUser(null);
@@ -18,7 +18,7 @@ const UserContext = ({ children }) => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch("http://localhost:5000/userData", {
+    fetch("https://socialmate-server.vercel.app/userData", {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
@@ -37,11 +37,13 @@ const UserContext = ({ children }) => {
         console.error(err);
       });
   }, [token]);
-
+  console.log(user);
   const authinfo = {
     user,
     logout,
     SetUser,
+    loading,
+    setLoading,
   };
   return (
     <authContext.Provider value={authinfo}>{children}</authContext.Provider>

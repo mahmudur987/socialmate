@@ -24,13 +24,16 @@ const AddPostForm = ({ posts, setPost }) => {
       return toast.success("write something first");
     }
     try {
-      const response = await fetch("http://localhost:5000/post", {
-        method: "POST", // or 'PUT'
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(post),
-      });
+      const response = await fetch(
+        "https://socialmate-server.vercel.app/post",
+        {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(post),
+        }
+      );
 
       const result = await response.json();
       if (result.status === "ok") {

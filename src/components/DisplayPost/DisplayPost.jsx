@@ -10,9 +10,10 @@ const DisplayPost = ({ post }) => {
   const [Comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [likes, setLikes] = useState([]);
+  const [islike, setIsLike] = useState(false);
   const date = new Date().toLocaleString();
   useEffect(() => {
-    let url = `http://localhost:5000/post/${_id}`;
+    let url = `https://socialmate-server.vercel.app /post/${_id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -24,6 +25,13 @@ const DisplayPost = ({ post }) => {
       });
   }, [setLikes, setComments, _id]);
   // handle like for user
+  useEffect(() => {
+    let userIsLiked = likes.find((x) => x.likedUserName === user?.name);
+    if (userIsLiked) {
+      setIsLike(true);
+    }
+  }, [likes]);
+  console.log(islike);
   const handleLike = async () => {
     if (!user) {
       return toast.error("please logIn first");
@@ -34,18 +42,22 @@ const DisplayPost = ({ post }) => {
     };
     console.log(data);
     try {
-      const response = await fetch(`http://localhost:5000/like/${_id}`, {
-        method: "POST", // or 'PUT'
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        `https://socialmate-server.vercel.app/like/${_id}`,
+        {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       const result = await response.json();
       console.log("Success:", result);
       if (result.status === "ok") {
         toast.success(result.data);
+        setIsLike(true);
       } else {
         toast.error(result.status);
       }
@@ -53,7 +65,6 @@ const DisplayPost = ({ post }) => {
       console.error("Error:", error);
     }
   };
-  const userIsLiked = likes.find((x) => x.likedUserName === user.name);
 
   const handleSubmitComment = async (e) => {
     e.preventDefault();
@@ -70,13 +81,16 @@ const DisplayPost = ({ post }) => {
     };
     console.log(data);
     try {
-      const response = await fetch(`http://localhost:5000/comment/${_id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        `https://socialmate-server.vercel.app/comment/${_id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       const result = await response.json();
       console.log("Success:", result);
@@ -106,11 +120,11 @@ const DisplayPost = ({ post }) => {
       <p className="text-right">
         <button
           className={`btn btn-sm btn-ghost font-bold  ${
-            userIsLiked ? "bg-pink-300" : ""
+            islike ? "bg-pink-300" : ""
           }`}
           onClick={handleLike}
         >
-          Like
+          {islike ? "Liked" : "Like"}
         </button>
       </p>
       <div className="mb-4">

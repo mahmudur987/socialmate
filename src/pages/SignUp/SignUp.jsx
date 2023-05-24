@@ -30,7 +30,7 @@ const SignUp = () => {
     };
 
     try {
-      fetch("http://localhost:5000/register", {
+      fetch("https://socialmate-server.vercel.app/register", {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",

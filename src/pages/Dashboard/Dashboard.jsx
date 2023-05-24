@@ -2,16 +2,19 @@ import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../Context/UserContext";
 import DashboardPost from "../../components/DashboardPost/DashboardPost";
 import { toast } from "react-hot-toast";
+import Loading from "../../components/Loading/Loading";
 
 const Dashboard = () => {
-  const { user } = useContext(authContext);
+  const { user, loading, setLoading } = useContext(authContext);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    let url = `http://localhost:5000/posts?email=${user?.email}`;
+    let url = `https://socialmate-server.vercel.app/posts?email=${user?.email}`;
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setPosts(data?.data))
+      .then((data) => {
+        setPosts(data?.data);
+      })
       .catch((err) => console.error(err));
   }, [user]);
   const DrawerItem = (
@@ -26,7 +29,7 @@ const Dashboard = () => {
   );
   const handleDelete = (id) => {
     console.log(id);
-    let url = `http://localhost:5000/post/${id}`;
+    let url = `https://socialmate-server.vercel.app/post/${id}`;
     fetch(url, {
       method: "DELETE",
     })
@@ -43,8 +46,13 @@ const Dashboard = () => {
       })
       .catch((err) => console.error(err));
   };
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
-    <div className=" relative drawer">
+    <div className=" relative drawer container lg:px-7">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col ">
         {/* <!-- Navbar --> */}
@@ -75,19 +83,25 @@ const Dashboard = () => {
               {DrawerItem}
             </ul>
           </div>
-          <div className="flex-grow  ">
-            {" "}
-            <div>
-              {posts
-                ?.sort((a, b) => new Date(b.date) - new Date(a.date))
-                .map((post, idx) => (
-                  <DashboardPost
-                    handleDelete={handleDelete}
-                    key={idx}
-                    post={post}
-                  />
-                ))}
-            </div>
+          <div className="flex-grow">
+            {posts.length > 0 ? (
+              <div>
+                {posts
+                  ?.sort((a, b) => new Date(b.date) - new Date(a.date))
+                  .map((post, idx) => (
+                    <DashboardPost
+                      handleDelete={handleDelete}
+                      key={idx}
+                      post={post}
+                    />
+                  ))}
+              </div>
+            ) : (
+              <h1 className="text-2xl text-center text-green-600">
+                {" "}
+                You did not post anything yet
+              </h1>
+            )}{" "}
           </div>
         </div>
       </div>
