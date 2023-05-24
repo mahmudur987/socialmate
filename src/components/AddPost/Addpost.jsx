@@ -23,7 +23,6 @@ const AddPostForm = ({ posts, setPost }) => {
     if (!content) {
       return toast.success("write something first");
     }
-    console.log(post);
     try {
       const response = await fetch("http://localhost:5000/post", {
         method: "POST", // or 'PUT'
@@ -34,7 +33,6 @@ const AddPostForm = ({ posts, setPost }) => {
       });
 
       const result = await response.json();
-      console.log("Success:", result);
       if (result.status === "ok") {
         toast.success(result.data);
         setPost([...posts, post]);

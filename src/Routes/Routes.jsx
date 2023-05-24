@@ -5,6 +5,7 @@ import LogIn from "../pages/LogIn/LogIn";
 import SignUp from "../pages/SignUp/SignUp";
 import NotFound from "../components/NotFound/NotFound";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import ForgetPassword from "../pages/forgetPassword/ForgetPassword";
 
 const routes = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const routes = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/forgetpassword",
+        element: <ForgetPassword />,
       },
       {
         path: "/dashboard",

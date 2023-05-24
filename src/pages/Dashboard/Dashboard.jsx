@@ -1,16 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "../../Context/UserContext";
 import DashboardPost from "../../components/DashboardPost/DashboardPost";
+import { toast } from "react-hot-toast";
 
 const Dashboard = () => {
   const { user } = useContext(authContext);
-  const [posts, setPosts] = useState();
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     let url = `http://localhost:5000/posts?email=${user?.email}`;
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setPosts(data.data))
+      .then((data) => setPosts(data?.data))
       .catch((err) => console.error(err));
   }, [user]);
   const DrawerItem = (
@@ -23,9 +24,27 @@ const Dashboard = () => {
       </li>
     </>
   );
+  const handleDelete = (id) => {
+    console.log(id);
+    let url = `http://localhost:5000/post/${id}`;
+    fetch(url, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status == "ok") {
+          toast.success(data.message);
 
+          const updatePosts = posts.filter((post) => post._id !== id);
+          console.log(updatePosts);
+          setPosts(updatePosts);
+        }
+      })
+      .catch((err) => console.error(err));
+  };
   return (
-    <div className="drawer">
+    <div className=" relative drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col ">
         {/* <!-- Navbar --> */}
@@ -62,7 +81,11 @@ const Dashboard = () => {
               {posts
                 ?.sort((a, b) => new Date(b.date) - new Date(a.date))
                 .map((post, idx) => (
-                  <DashboardPost key={idx} post={post} />
+                  <DashboardPost
+                    handleDelete={handleDelete}
+                    key={idx}
+                    post={post}
+                  />
                 ))}
             </div>
           </div>

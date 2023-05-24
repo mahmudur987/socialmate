@@ -11,7 +11,6 @@ const Home = () => {
       .then((data) => setPost(data.data))
       .catch((err) => console.error(err));
   }, []);
-  console.log(posts);
   return (
     <div>
       <AddPostForm posts={posts} setPost={setPost} />
