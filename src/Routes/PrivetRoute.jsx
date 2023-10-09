@@ -1,9 +1,8 @@
 import { React, useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-
 import { authContext } from "../Context/UserContext";
-import Loading from "../Components/Loading/Loading";
 import { toast } from "react-hot-toast";
+import Loading from "../components/Loading/Loading";
 
 const PrivatRoutes = ({ children }) => {
   const location = useLocation();
