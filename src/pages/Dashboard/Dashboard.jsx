@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    let url = `https://socialmate-server.vercel.app/posts?email=${user?.email}`;
+    let url = `https://socialmate-server-6cldfhaow-mahmudur987.vercel.app/posts?email=${user?.email}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -29,7 +29,7 @@ const Dashboard = () => {
   );
   const handleDelete = (id) => {
     console.log(id);
-    let url = `https://socialmate-server.vercel.app/post/${id}`;
+    let url = `https://socialmate-server-6cldfhaow-mahmudur987.vercel.app/post/${id}`;
     fetch(url, {
       method: "DELETE",
     })

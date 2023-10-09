@@ -18,13 +18,16 @@ const UserContext = ({ children }) => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch("https://socialmate-server.vercel.app/userData", {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token: localStorage.getItem("token") }),
-    })
+    fetch(
+      "https://socialmate-server-6cldfhaow-mahmudur987.vercel.app/userData",
+      {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "ok") {

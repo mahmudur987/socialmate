@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { authContext } from "../../Context/UserContext";
 import { toast } from "react-hot-toast";
-
 // eslint-disable-next-line react/prop-types
 const AddPostForm = ({ posts, setPost }) => {
   const [content, setContent] = useState("");
@@ -9,23 +8,24 @@ const AddPostForm = ({ posts, setPost }) => {
   const { user } = useContext(authContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const post = {
-      postUserName: user.name,
-      postUserEmail: user.email,
-      text: content,
-      likes: [],
-      comments: [],
-      date,
-    };
     if (!user) {
       return toast.error("please logIn first");
     }
     if (!content) {
       return toast.success("write something first");
     }
+
     try {
+      const post = {
+        postUserName: user?.name,
+        postUserEmail: user?.email,
+        text: content,
+        likes: [],
+        comments: [],
+        date,
+      };
       const response = await fetch(
-        "https://socialmate-server.vercel.app/post",
+        "https://socialmate-server-6cldfhaow-mahmudur987.vercel.app/post",
         {
           method: "POST", // or 'PUT'
           headers: {
@@ -34,18 +34,16 @@ const AddPostForm = ({ posts, setPost }) => {
           body: JSON.stringify(post),
         }
       );
-
       const result = await response.json();
       if (result.status === "ok") {
-        toast.success(result.data);
-        setPost([...posts, post]);
+        toast.success(result.message);
+        setPost([...posts, result?.data]);
       } else {
         toast.error(result.status);
       }
     } catch (error) {
       console.error("Error:", error);
     }
-
     setContent("");
   };
 

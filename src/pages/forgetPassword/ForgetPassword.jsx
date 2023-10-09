@@ -15,13 +15,16 @@ const ForgetPassword = () => {
     const email = form.name.value;
 
     try {
-      fetch("https://socialmate-server.vercel.app/forgot-password", {
-        method: "POST", // or 'PUT'
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      })
+      fetch(
+        "https://socialmate-server-6cldfhaow-mahmudur987.vercel.app/forgot-password",
+        {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           Setloading(false);

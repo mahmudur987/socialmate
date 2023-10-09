@@ -13,23 +13,26 @@ const LogIn = () => {
     Setloading(true);
     event.preventDefault();
     const form = event.target;
-    const name = form.name.value;
+    const email = form.email.value;
 
     const password = form.password.value;
 
     const user = {
-      name,
+      email,
       password,
     };
 
     try {
-      fetch("https://socialmate-server.vercel.app/login-user", {
-        method: "POST", // or 'PUT'
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      })
+      fetch(
+        "https://socialmate-server-6cldfhaow-mahmudur987.vercel.app/login-user",
+        {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           Setloading(false);
@@ -55,8 +58,8 @@ const LogIn = () => {
   }
 
   return (
-    <div className="hero min-h-screen">
-      <div className="hero-content flex-col lg:flex-row-reverse bg-base-200">
+    <div className="max-w-4xl w-full mx-auto  my-20">
+      <div className="hero-content flex-col lg:flex-row-reverse bg-base-200 gap-5">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Log In!</h1>
           <p className="py-6">
@@ -71,13 +74,13 @@ const LogIn = () => {
           <form onSubmit={handleSubmit} className="card-body">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Name</span>
+                <span className="label-text">Email</span>
               </label>
               <input
                 // required
-                name="name"
-                type="text"
-                placeholder="name"
+                name="email"
+                type="email"
+                placeholder="Email"
                 className="input input-bordered"
               />
             </div>

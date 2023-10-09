@@ -3,7 +3,6 @@ import Loading from "../../components/Loading/Loading";
 import { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { authContext } from "../../Context/UserContext";
-
 const SignUp = () => {
   const [loading, Setloading] = useState(false);
   const [error, SetError] = useState("");
@@ -30,13 +29,16 @@ const SignUp = () => {
     };
 
     try {
-      fetch("https://socialmate-server.vercel.app/register", {
-        method: "POST", // or 'PUT'
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      })
+      fetch(
+        "https://socialmate-server-6cldfhaow-mahmudur987.vercel.app/register",
+        {
+          method: "POST", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(user),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -60,7 +62,7 @@ const SignUp = () => {
   }
 
   return (
-    <div className="hero min-h-screen">
+    <div className="max-w-3xl w-full mx-auto my-10">
       <div className="hero-content flex-col lg:flex-row-reverse bg-base-200">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Sign Up!</h1>

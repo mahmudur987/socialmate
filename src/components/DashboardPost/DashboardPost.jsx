@@ -21,7 +21,7 @@ const DashboardPost = ({ post, handleDelete }) => {
     setShowModal(false);
   };
   useEffect(() => {
-    let url = `https://socialmate-server.vercel.app/post/${_id}`;
+    let url = `https://socialmate-server-6cldfhaow-mahmudur987.vercel.app/post/${_id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -41,7 +41,7 @@ const DashboardPost = ({ post, handleDelete }) => {
 
     try {
       const response = await fetch(
-        `https://socialmate-server.vercel.app/updatepost/${id}`,
+        `https://socialmate-server-6cldfhaow-mahmudur987.vercel.app/updatepost/${id}`,
         {
           method: "PATCH", // or 'PUT'
           headers: {

@@ -10,7 +10,7 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true);
-    let url = "https://socialmate-server.vercel.app/post";
+    let url = "https://socialmate-server-6cldfhaow-mahmudur987.vercel.app/post";
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
