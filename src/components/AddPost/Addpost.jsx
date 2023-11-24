@@ -52,7 +52,7 @@ const AddPostForm = ({ posts, setPost }) => {
     <div className="max-w-4xl mx-auto bg-white p-4 rounded shadow">
       <h2 className="text-xl font-semibold mb-4">
         {" "}
-        Whats on your mind? share with your friend
+        Whats on your mind? share with your friends
       </h2>
       <form onSubmit={handleSubmit} className="text-right">
         <textarea

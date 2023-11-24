@@ -18,8 +18,6 @@ const Header = () => {
     Navigate("/");
   };
 
-  console.log(user);
-
   const NavItem = (
     <>
       <li className="hover:bg-pink-100 rounded-lg hover:text-green-500">

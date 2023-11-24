@@ -108,7 +108,7 @@ const DisplayPost = ({ post }) => {
   };
 
   return (
-    <div className="max-w-4xl w-full mx-auto bg-white p-4 rounded  mb-8 border border-green-500 shadow-xl">
+    <div className="max-w-4xl w-full mx-auto bg-white p-4 rounded  mb-8 border-[0.02px] border-green-200 shadow-3xl">
       <h2 className="text-lg font-semibold mb-2">
         <span className="text-red-500 text-3xl uppercase ">{postUserName}</span>
         <span className="ml-5">
