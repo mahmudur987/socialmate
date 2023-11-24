@@ -25,7 +25,7 @@ const Home = () => {
   }
 
   return (
-    <div className="container mx-auto ">
+    <div className="container mx-auto min-h-screen">
       <AddPostForm posts={posts} setPost={setPost} />
 
       <div className="container mx-auto flex flex-col items-center ">

@@ -30,7 +30,7 @@ const SignUp = () => {
 
     try {
       fetch(
-        "https://socialmate-server-6cldfhaow-mahmudur987.vercel.app/register",
+        "https://socialmate-server-97vj92yf5-mahmudur987.vercel.app/user/register",
         {
           method: "POST", // or 'PUT'
           headers: {
@@ -45,7 +45,8 @@ const SignUp = () => {
           if (data.status === "ok") {
             Setloading(false);
             SetUser(user);
-            localStorage.setItem("token", data.data);
+            localStorage.setItem("accessToken", data.accessToken);
+            localStorage.setItem("refreshToken", data.refreshToken);
             navigate("/");
           } else {
             toast.error(data.status);

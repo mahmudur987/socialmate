@@ -4,7 +4,7 @@ import Footer from "../components/Footer/Footer";
 
 const Main = () => {
   return (
-    <div className="container mx-auto  ">
+    <div className="container mx-auto min-h-screen flex flex-col justify-between ">
       <Header />
       <Outlet />
       <Footer />

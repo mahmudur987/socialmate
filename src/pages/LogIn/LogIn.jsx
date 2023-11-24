@@ -24,7 +24,7 @@ const LogIn = () => {
 
     try {
       fetch(
-        "https://socialmate-server-6cldfhaow-mahmudur987.vercel.app/login-user",
+        "https://socialmate-server-97vj92yf5-mahmudur987.vercel.app/user/login-user",
         {
           method: "POST", // or 'PUT'
           headers: {
@@ -36,9 +36,9 @@ const LogIn = () => {
         .then((res) => res.json())
         .then((data) => {
           Setloading(false);
-          console.log(data);
           if (data.status === "ok") {
-            localStorage.setItem("token", data.data);
+            localStorage.setItem("accessToken", data.accessToken);
+            localStorage.setItem("refreshToken", data.refreshToken);
             toast.success("user Login scssessfully");
             SetUser(user);
             navigate("/");
@@ -58,8 +58,8 @@ const LogIn = () => {
   }
 
   return (
-    <div className="max-w-4xl w-full mx-auto  my-20">
-      <div className="hero-content flex-col lg:flex-row-reverse bg-base-200 gap-5">
+    <div className="max-w-4xl w-full mx-auto ">
+      <div className="hero-content flex-col lg:flex-row-reverse bg-base-200 gap-5 p-4">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Log In!</h1>
           <p className="py-6">
@@ -77,7 +77,7 @@ const LogIn = () => {
                 <span className="label-text">Email</span>
               </label>
               <input
-                // required
+                required
                 name="email"
                 type="email"
                 placeholder="Email"
@@ -90,7 +90,7 @@ const LogIn = () => {
                 <span className="label-text">Password</span>
               </label>
               <input
-                // required
+                required
                 name="password"
                 type="password"
                 placeholder="password"
@@ -109,9 +109,9 @@ const LogIn = () => {
           <Link
             to={"/forgetpassword"}
             type="submit"
-            className=" w-full text-center"
+            className=" w-full text-center p-1 font-bold"
           >
-            forget password
+            Forget password
           </Link>
         </div>
       </div>

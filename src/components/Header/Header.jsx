@@ -17,6 +17,9 @@ const Header = () => {
     logout();
     Navigate("/");
   };
+
+  console.log(user);
+
   const NavItem = (
     <>
       <li className="hover:bg-pink-100 rounded-lg hover:text-green-500">
@@ -34,6 +37,7 @@ const Header = () => {
       {user ? (
         <li className="hover:bg-pink-100 rounded-lg hover:text-green-500">
           <button onClick={() => handleLogout()}>SignOut </button>
+          <button className="text-xl font-bold">{user?.name} </button>
         </li>
       ) : (
         <>

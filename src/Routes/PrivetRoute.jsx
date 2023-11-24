@@ -17,7 +17,7 @@ const PrivatRoutes = ({ children }) => {
   }
 
   if (!user) {
-    toast.error("you should login first");
+    toast.error("Please Log In", { id: 1 });
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

@@ -16,7 +16,7 @@ const ForgetPassword = () => {
 
     try {
       fetch(
-        "https://socialmate-server-6cldfhaow-mahmudur987.vercel.app/forgot-password",
+        "https://socialmate-server-dabsi4c6l-mahmudur987.vercel.app/forgot-password",
         {
           method: "POST", // or 'PUT'
           headers: {
@@ -29,7 +29,7 @@ const ForgetPassword = () => {
         .then((data) => {
           Setloading(false);
           console.log(data);
-          toast.error(data.status, {
+          toast.success(data.status, {
             duration: 10000,
           });
         });
@@ -54,7 +54,7 @@ const ForgetPassword = () => {
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-xl">
-                  Please write your aignup Email
+                  Please write your Login Email
                 </span>
               </label>
               <input
@@ -74,13 +74,16 @@ const ForgetPassword = () => {
             </div>
           </form>
 
-          <Link
-            to={"/login"}
-            type="submit"
-            className=" w-full text-center text-2xl font-bold text-blue-600 underline p-3"
-          >
-            go login
-          </Link>
+          <p className="flex justify-center items-center gap-2">
+            <span>After Reset Password Click For</span>
+            <Link
+              to={"/login"}
+              type="submit"
+              className="   text-xl font-bold text-blue-600  "
+            >
+              login
+            </Link>
+          </p>
         </div>
       </div>
     </div>
