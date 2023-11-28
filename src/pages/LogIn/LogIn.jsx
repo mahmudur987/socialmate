@@ -13,23 +13,20 @@ const LogIn = () => {
     Setloading(true);
     event.preventDefault();
     const form = event.target;
-    const email = form.email.value;
+    const name = form.email.value;
     const password = form.password.value;
     const user = {
-      email,
+      name,
       password,
     };
     try {
-      fetch(
-        "https://socialmate-server-97vj92yf5-mahmudur987.vercel.app/user/login-user",
-        {
-          method: "POST", // or 'PUT'
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(user),
-        }
-      )
+      fetch("http://localhost:5000/user/login-user", {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      })
         .then((res) => res.json())
         .then((data) => {
           Setloading(false);
@@ -71,12 +68,12 @@ const LogIn = () => {
           <form onSubmit={handleSubmit} className="card-body">
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text">Name</span>
               </label>
               <input
                 required
                 name="email"
-                type="email"
+                type="text"
                 placeholder="Email"
                 className="input input-bordered"
               />
